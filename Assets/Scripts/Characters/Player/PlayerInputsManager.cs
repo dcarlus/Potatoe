@@ -46,17 +46,15 @@ public class PlayerInputsManager
     public PlayerInputsManager()
     {
         m_playerInputs = new PlayerInputs();
-        m_playerInputs.CharacterControls.Movement.performed += ctx =>
-        {
-            m_inputReadMovement = ctx.ReadValue<Vector2>();
-        };
 
-        m_playerInputs.CharacterControls.Movement.canceled += ctx =>
-        {
-            m_inputReadMovement = Vector2.zero;
-        };
+        m_playerInputs.CharacterControls.Move.performed +=
+            ctx => m_inputReadMovement = ctx.ReadValue<Vector2>();
 
-        m_playerInputs.CharacterControls.Walk.performed += ctx => m_inputReadWalking = ctx.ReadValueAsButton();
+        m_playerInputs.CharacterControls.Move.canceled +=
+            ctx => m_inputReadMovement = Vector2.zero;
+
+        m_playerInputs.CharacterControls.Walk.performed +=
+            ctx => m_inputReadWalking = ctx.ReadValueAsButton();
     }
 
     /// <summary>
@@ -70,7 +68,7 @@ public class PlayerInputsManager
 
         if (m_inputReadWalking)
         {
-            movement = m_inputReadMovement / 2f;
+            movement = m_inputReadMovement / 4f;
         }
 
         // Smooth the values over time.
