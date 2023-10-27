@@ -37,6 +37,8 @@ public class PlayerAnimationStateController : MonoBehaviour
         handleDisplacement(velocityVector);
         handleRotation(velocityVector);
         //m_oldVelocityVector = velocityVector;
+
+        m_animManager.setCrouchingFlag(m_inputsManager.isCrouching());
     }
 
     /// <summary>

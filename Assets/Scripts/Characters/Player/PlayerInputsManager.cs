@@ -23,6 +23,11 @@ public class PlayerInputsManager
     /// </summary>
     private bool m_inputReadWalking;
 
+    /// <summary>
+    /// Read flag from the inputs to know if the player crouch or not.
+    /// </summary>
+    private bool m_inputReadCrouching;
+
     
     /// <summary>
     /// Speed for smoothing movement over time.
@@ -55,6 +60,9 @@ public class PlayerInputsManager
 
         m_playerInputs.CharacterControls.Walk.performed +=
             ctx => m_inputReadWalking = ctx.ReadValueAsButton();
+
+        m_playerInputs.CharacterControls.Crouch.performed +=
+            ctx => m_inputReadCrouching = ctx.ReadValueAsButton();
     }
 
     /// <summary>
@@ -80,6 +88,18 @@ public class PlayerInputsManager
         );
 
         return new Vector3(m_currentInputVector.x, 0f, m_currentInputVector.y);
+    }
+
+    /// <summary>
+    /// Gets true if the player is pressing the Crouch command; false
+    /// otherwise.
+    /// </summary>
+    /// <returns>
+    /// true if the player is crouching; false if standing up.
+    /// </returns>
+    public bool isCrouching()
+    {
+        return m_inputReadCrouching;
     }
 
     /// <summary>

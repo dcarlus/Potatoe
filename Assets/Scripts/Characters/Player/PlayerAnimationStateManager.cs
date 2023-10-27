@@ -18,6 +18,11 @@ public class PlayerAnimationStateManager
     private int m_velocityMagnitudeHash;
 
     /// <summary>
+    /// ID reference to the animator isCrouching parameter.
+    /// </summary>
+    private int m_isCrouchingHash;
+
+    /// <summary>
     /// Creates a new PlayerAnimationStateManager instance.
     /// </summary>
     /// <param name="animator">
@@ -27,6 +32,7 @@ public class PlayerAnimationStateManager
     {
         m_animator = animator;
         m_velocityMagnitudeHash = Animator.StringToHash(AnimationParameters.VelocityMagnitude);
+        m_isCrouchingHash = Animator.StringToHash(AnimationParameters.IsCrouching);
     }
 
     /// <summary>
@@ -36,5 +42,16 @@ public class PlayerAnimationStateManager
     public void changeMovementVelocity(float velocity)
     {
         m_animator.SetFloat(m_velocityMagnitudeHash, velocity);
+    }
+
+    /// <summary>
+    /// Changes the crouching flag value in the animator.
+    /// </summary>
+    /// <param name="isCrouching">
+    /// Value of the crouching flag. true to crouch, false to stand up.
+    /// </param>
+    public void setCrouchingFlag(bool isCrouching)
+    {
+        m_animator.SetBool(m_isCrouchingHash, isCrouching);
     }
 }
